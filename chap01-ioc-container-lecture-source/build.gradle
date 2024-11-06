@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ohgiraffers'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // https://mvnrepository.com/artifact/org.springframework/spring-context
+    implementation 'org.springframework:spring-context:5.2.22.RELEASE'
+    // maven에서 스프링 5.2.22 release 추가 (release → 안정성 입증되어, 배포됐다)
+}
+
+test {
+    useJUnitPlatform()
+}
