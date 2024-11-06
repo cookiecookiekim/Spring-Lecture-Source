@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--24-11-06 (수) 2교시 xml방식으로 구성, 환경 설정-->
+    <!-- 스프링 공식 홈페이지, xml 방식으로 구성 (코드 복붙)-->
+
+    <!-- 목적 : MemberDTO를 이용하여 회원 1명 생성 후 등록 -->
+    <bean id="member" class="com.ohgiraffers.common.MemberDTO">
+        <!-- id , class(풀클래스) 설정-->
+        <!-- con-arg 설정 → 이런식으로도 만들 수 있다 라고 알기 -->
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg name="id" value="user01"/>
+        <constructor-arg index="2">
+            <value>pass01</value>
+        </constructor-arg>
+        <constructor-arg name="name" value="김규남"/>
+    </bean>
+
+</beans>
