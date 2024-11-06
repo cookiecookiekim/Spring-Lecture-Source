@@ -11,7 +11,7 @@ public class ContextConfiguration {
 
     @Bean
     public Account account () {
-
+        System.out.println("1번");
         return new PersonalAccount(20, "1002-051-054-123");
         // 실제 인스턴스 생성은 PersonalAccount (Account 는 인터페이스이므로)
     }

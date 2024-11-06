@@ -16,6 +16,7 @@ public class PersonalAccount implements Account { // Account 상속 받기
 
     // 생성자를 통한 초기화
     public PersonalAccount(int bankCode, String accNo){
+        System.out.println("2번");
         this.bankCode = bankCode;
         this.accNo = accNo;
     }

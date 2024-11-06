@@ -1,6 +1,7 @@
 package com.ohgiraffers.section03.annotationconfig.subsection01.java;
 
 import com.ohgiraffers.common.MemberDAO;
+import com.ohgiraffers.common.MemberDTO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -22,7 +23,7 @@ public class Application {
         *   등을 사용한다. */
 
         // bean들을 꺼내기
-        // getBeanDefinitionNames : 컨테이너에 생선된 bean 이름 반환
+        // getBeanDefinitionNames : 컨테이너에 생산된 bean 이름 반환
         String[] beanNames = context.getBeanDefinitionNames();
         for (String bean : beanNames){
             System.out.println("bean = " + bean);
@@ -39,6 +40,10 @@ public class Application {
         MemberDAO memberDAO = context.getBean("memberDAO", MemberDAO.class);
         System.out.println(memberDAO.selectMember(1));
         // MemberDTO(no=1, id=user01, pwd=pass01, name=김규남) 출력
+        System.out.println(memberDAO.insertMember(new MemberDTO(3,"user03","pass03","하츄핑")));
+        // true 출력
+        System.out.println(memberDAO.selectMember(3));
+        // MemberDTO(no=3, id=user03, pwd=pass03, name=하츄핑) 출력
 
     }
 }

@@ -15,7 +15,7 @@ public class Application {
                 = new AnnotationConfigApplicationContext(ContextConfiguration.class);
                                         // bean 등록해놨던 클래스 정보 입력
 
-        MemberDTO member = context.getBean("member", MemberDTO.class);
+        MemberDTO member = context.getBean("getMember", MemberDTO.class);
         System.out.println("member = " + member);
     }
 }

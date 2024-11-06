@@ -17,7 +17,7 @@ public class Application {
 
         // 담았으니, 꺼내서 사용해보기 (new 없어도 됨!)
         // 방식 1 : bean의 id를 통해 접근해보기 (객체 가져오기)
-//        MemberDTO member = (MemberDTO) context.getBean("member"); 일단 주석
+//        MemberDTO member = (MemberDTO) context.getBean("member"); // 일단 주석
 
         // 방식 2 :  bean의 클래스 정보를 전달하여 가져오는 방법
 //        MemberDTO member = context.getBean(MemberDTO.class);

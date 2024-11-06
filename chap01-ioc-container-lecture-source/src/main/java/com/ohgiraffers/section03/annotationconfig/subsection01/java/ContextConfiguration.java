@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FilterType;
 // ★ @Configuration이 Component 어노테이션을 수집해야 Component 를 bean으로 등록할 수 있음!!!! ★
 @Configuration("configuration03")
 
-// 스캔을 통해서 Component를 찾아서, beand으로 등록!!
+// 스캔을 통해서 Component를 찾아서, bean으로 등록!!
 /* test 1 basePackages */
 //@ComponentScan(basePackages = "com.ohgiraffers")
 /* test 2 basePackages 안에서 제외하고 싶은 애들 설정*/
