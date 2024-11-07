@@ -3,6 +3,7 @@ package com.ohgiraffers.section02.common;
 // 24-11-07 (목) 3교시, ③ 인터페이스의 메서드를 실제 동작시킬 클래스 생성
 
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component // ④ 컴포넌트 설정
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 *     찾게되는 경우, 자동으로 연결을 우선시 할 타입으로 설정
 *     동일한 타입의 클래스중 한 개만 @Primary 어노테이션을
 *     사용할 수 있다. */
+@Order(3) // primary와 qualifier는 하나씩 지정이지만 Order는 여러개의 순서를 지정할 수 있음.
 public class Koala implements Animal {
 
     @Override

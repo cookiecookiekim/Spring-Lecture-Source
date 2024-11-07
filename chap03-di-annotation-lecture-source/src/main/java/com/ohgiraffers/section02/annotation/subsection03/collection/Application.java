@@ -15,7 +15,7 @@ public class Application {
         String [] beanName = context.getBeanDefinitionNames();
         for (String bean : beanName) {
             System.out.println("bean = " + bean);
-            //
+            // Order 어노태이션에 의해, 동작 순서 변경
         }
         AnimalService animalService
                 = context.getBean("collectionService", AnimalService.class);
