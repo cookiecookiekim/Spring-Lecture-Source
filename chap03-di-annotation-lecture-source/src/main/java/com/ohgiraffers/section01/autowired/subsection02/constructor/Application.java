@@ -1,4 +1,4 @@
-package com.ohgiraffers.section01.autowired.subsection01.field;
+package com.ohgiraffers.section01.autowired.subsection02.constructor;
 
 import com.ohgiraffers.section01.common.BookDTO;
 import org.springframework.context.ApplicationContext;
@@ -6,12 +6,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.List;
 
-// 24-11-07 (목) 1교시 ① Application 생성
+// 24-11-07 (목) 2교시 ① Application 생성 (field app 복붙)
 public class Application {
 
     public static void main(String[] args) {
 
-        /* index. 1. 의존성 주입(1) - 필드 */
+        /* index. 2. 생성자 주입(2) - 생성자 */
         /* comment. @Autowired 어노테이션
         *   객체와 객체간의 의존성을 생성할 때 대표적인 어노테이션.
         *   1. 필드 주입 (사용 빈도 : SI 업체 20% , 특징 : 간결)
@@ -23,12 +23,12 @@ public class Application {
                 new AnnotationConfigApplicationContext("com.ohgiraffers.section01");
         // → com.ohgiraffers.section01 내에 있는 모든 컴포넌트 스캔
 
-        // ⑪ 출력해보기
-        BookService service = context.getBean("fieldService", BookService.class);
+        BookService service = context.getBean("constructorService", BookService.class); // 임포트 확인
 
         List<BookDTO> bookList = service.selectAllBooks();
         for (BookDTO book : bookList) {
             System.out.println("book = " + book);
         }
+        System.out.println(service.selectOneBook(1)); // ⑧ no 값으로 조회해보기
     }
 }

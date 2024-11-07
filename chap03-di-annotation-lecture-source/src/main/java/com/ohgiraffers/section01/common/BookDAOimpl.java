@@ -11,6 +11,7 @@ import java.util.*;
 // @Component
 // @Component 역할에 따라 특수한 @Repository 어노테이션
 @Repository("bookDAO")// 컴포넌트보다 세분화된 어노테이션으로 등록
+// DB에 접근용 어노테이션. (DAO의 역할)
 public class BookDAOimpl implements BookDAO {
 
     private final Map<Integer,BookDTO> bookList;
