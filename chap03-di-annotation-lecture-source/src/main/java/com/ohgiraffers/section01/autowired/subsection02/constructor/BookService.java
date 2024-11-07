@@ -19,7 +19,7 @@ public class BookService {
     *   따라서 메서드가 호출될 때(런타임) 에러가 발생됨.
     *   생성자 주입은 의존성이 있는 객체가 생성되지 않으면
     *   객체의 생성 자체가 불가능하며 컴파일 에러가 발생한다.
-    *   2. 필드에 final 키워드를 쓸 수 있기 떄문에 객체 생성
+    *   2. 필드에 final 키워드를 쓸 수 있기 때문에 객체 생성
     *   이후, 의존성을 변경할 수 없어, 안정성을 보장한다. */
 
     private final BookDAO bookDAO; // ⑥ final 안 적을시 @Autowired 안에서 new 사용 됨
