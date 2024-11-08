@@ -1,4 +1,4 @@
-package com.ohgiraffers.section01.scope.subsection01.singleton;
+package com.ohgiraffers.section02.initdestroy.subsection02.annotation;
 
 import com.ohgiraffers.common.Cart;
 import com.ohgiraffers.common.Drink;
@@ -7,18 +7,17 @@ import com.ohgiraffers.common.Product;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-// 24-11-08 (금) 1교시 bean의 생명주기
+// 24-11-08 (금) 2교시 , annotation 방식의 init : 생성 destroy : 파괴
 public class Application {
 
     public static void main(String[] args) {
 
         ApplicationContext context
                 = new AnnotationConfigApplicationContext(ContextConfig.class);
-                                           // ③ ContextConfig.class 정보 넘겨주기
 
         String [] beanNames = context.getBeanDefinitionNames();
         for (String bean : beanNames) {
-            System.out.println("bean = " + bean); // ⑨ bean들이 컨테이너에 잘 등록했는지 확인하기
+            System.out.println("bean = " + bean);
         }
 
         // ⑩ 빈들 꺼내보기
@@ -39,18 +38,27 @@ public class Application {
         Cart cart2 = context.getBean("cart", Cart.class);
         cart2.addItem(coke);
         System.out.println("두 번째 손님 카트 목록 : " + cart2.showCart());
-        // 첫번째 손님의 카트 목록에 coke 가 추가되어 출력 → 따로 담길 줄 알았지만 하나의 인스턴스여서 함께 출력
+        // subsection1과 다르게, 첫번 째 손님과 다른 카트에 담겨 출력.
 
         System.out.println("cart1 : " + cart1.hashCode());
-        System.out.println("cart2 : " + cart2.hashCode()); // 1과 2의 hashCode가 동일
-        // 이유 : 아래 comment 참고
+        System.out.println("cart2 : " + cart2.hashCode()); // 1과 2의 hashCode가 상이
+        // 문제 해결!
 
-
+        System.out.println("=============section02-subsection01-java====================");
+        // initmethod 등록 후 run 시 최초 동작
         /* comment.
-        *   Spring 프레임워크에서 Bean(객체)의 기본 scope는 Singleton이다.
-        *   Bean 등록 시, 하나의 인스턴스만 생성하여 공유 및 사용한다.
-        *   → 설정 파일을 Bean으로 등록하고, 그 이외에 행위 위주를 bean으로 등록한다. */
+        *   init 메서드는 Bean 객체 생성 시점에 동작한다.
+        *   destroy 메서드는 Bean 객체 소멸 시점에 동작하게 되는데
+        *   이는 컨테이너를 종료시키지 않으면 확인할 수 없다.
+        *   가비지 컬렉터가 해당 빈을 메모리에서 삭제할 때 destroy 메서드가
+        *   동작하게 되는데 메모리에서 지우기 전에 프로세스가 종료되기 때문에
+        *   강제로 컨테이너를 닫아줘야 destroy 확인이 가능하다. */
 
-        // bean 사용시 싱글톤에 의한 값 누적을 해결하기 → subsection02 - prototype
+        // destroy는 굳이 알 필요는 없지만, 닫는 방법은 아래 확인
+        ((AnnotationConfigApplicationContext)context).close();
+        // close 등록 후, run 시, 맨 마지막에 destroy 메서드 동작
+
+        System.out.println("=============section02-subsection02-annotation====================");
+        //  @PostConstruct , @Predestroy 의존성 주입 후 run시, 잘 동작
     }
 }

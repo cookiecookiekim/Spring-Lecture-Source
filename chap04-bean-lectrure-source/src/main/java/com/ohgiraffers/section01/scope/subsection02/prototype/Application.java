@@ -1,4 +1,4 @@
-package com.ohgiraffers.section01.scope.subsection01.singleton;
+package com.ohgiraffers.section01.scope.subsection02.prototype;
 
 import com.ohgiraffers.common.Cart;
 import com.ohgiraffers.common.Drink;
@@ -7,7 +7,7 @@ import com.ohgiraffers.common.Product;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-// 24-11-08 (금) 1교시 bean의 생명주기
+// 24-11-08 (금) 2교시 bean의 생명주기 , 싱글톤 bean 해결해보기
 public class Application {
 
     public static void main(String[] args) {
@@ -39,18 +39,11 @@ public class Application {
         Cart cart2 = context.getBean("cart", Cart.class);
         cart2.addItem(coke);
         System.out.println("두 번째 손님 카트 목록 : " + cart2.showCart());
-        // 첫번째 손님의 카트 목록에 coke 가 추가되어 출력 → 따로 담길 줄 알았지만 하나의 인스턴스여서 함께 출력
+        // subsection1과 다르게, 첫번 째 손님과 다른 카트에 담겨 출력.
 
         System.out.println("cart1 : " + cart1.hashCode());
-        System.out.println("cart2 : " + cart2.hashCode()); // 1과 2의 hashCode가 동일
-        // 이유 : 아래 comment 참고
+        System.out.println("cart2 : " + cart2.hashCode()); // 1과 2의 hashCode가 상이
+        // 문제 해결!
 
-
-        /* comment.
-        *   Spring 프레임워크에서 Bean(객체)의 기본 scope는 Singleton이다.
-        *   Bean 등록 시, 하나의 인스턴스만 생성하여 공유 및 사용한다.
-        *   → 설정 파일을 Bean으로 등록하고, 그 이외에 행위 위주를 bean으로 등록한다. */
-
-        // bean 사용시 싱글톤에 의한 값 누적을 해결하기 → subsection02 - prototype
     }
 }
