@@ -26,6 +26,17 @@ dependencies {
 
     // https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+
+    // 24-11-11 월 2교시, Aspect 어노테이션 사용을 위한 의존성 추가
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+    implementation 'org.aspectj:aspectjweaver:1.9.22' // comment. 접두사 implementation로 변경
+    // https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+    implementation 'org.aspectj:aspectjrt:1.9.22' // comment. 접두사 implementation
+    // https://mvnrepository.com/artifact/org.springframework/spring-aop
+    implementation 'org.springframework:spring-aop:6.1.14' // spring과 버전 맞춰주기
+
+
+
 }
 
 test {

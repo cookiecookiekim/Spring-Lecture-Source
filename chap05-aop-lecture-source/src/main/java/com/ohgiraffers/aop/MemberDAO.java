@@ -16,7 +16,7 @@ public class MemberDAO {
 
     public MemberDAO(){ // ⑧ 빈으로써 인식될 때 데이터 생성
         memberMap = new HashMap<>();
-        memberMap.put(1L, new MemberDTO(1L, "김규남"));
+        memberMap.put(1L, new MemberDTO(1L, "김규남")); // key , value 설정
         memberMap.put(2L, new MemberDTO(2L, "김규순"));
     }
     // 회원 전체 조회
