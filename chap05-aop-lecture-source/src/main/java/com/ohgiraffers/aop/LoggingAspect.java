@@ -12,7 +12,8 @@ import org.springframework.util.StopWatch;
 import java.util.Map;
 
 /* @Aspect 어노테이션 : AOP 기능을 사용하기 위한 어노테이션
- * → 사용하기 위해 Maven에서 다운 3가지 의존성 다운 */
+ * → 사용하기 위해 Maven에서 다운 3가지 의존성 다운
+ * Pointcut과 Advice를 하나의 클래스 단위로 정의하기 위한 어노테이션 */
 @Aspect
 @Component // 중간중간 빈들을 들어갔다 나왔다 해야하기 때문에 Component 어노테이션 적용
 public class LoggingAspect {
@@ -23,16 +24,14 @@ public class LoggingAspect {
      *   수식어란, public-private-protected-default 등의 접근제어자를 의미하며 생략 가능
      *   * → 와일드 카드(전부 가능하다는 의미) */
 
-    @Pointcut("execution(* com.ohgiraffers.aop.*Service.*(..))")
+    @Pointcut("execution(* com.ohgiraffers.aop.*Service.*(..))") // 이 위치에서 실행하겠다.
     /* comment. ☆ 해석하기 ☆
         MemberService 뿐만 아니라 Service 앞에 뭐가 붙든, 다 허용 하겠다. ex) MenuService도 허용
          *Service → 이름이 Service로 끝내는 클래스 의미
          *Service.*(..) → 매개변수가 0개 이상인 모든 메서드
          *Service.*(*, ..) → 매개변수가 1개 이상인 모든 메서드 */
 
-    public void logPointCut() {
-
-    }
+    public void logPointCut() {}
 
     /* comment. JoinPoint는 * com.ohgiraffers.aop.*Service.*(..)) 정보를 이미 갖고 있음.
      *   JoinPoint : 포인트 컷으로 설정한 실행 지점을 의미.
@@ -84,11 +83,11 @@ public class LoggingAspect {
     }
 
     /* comment. @AfterThrowing
-    *   이거로 크게 할 건 없음, 가볍게 넘기기*/
+    *   이거로 크게 할 건 없음, 가볍게 넘기기 */
     @AfterThrowing(pointcut = "logPointCut()", throwing = "exception")
     public void logAfterThrowing(Throwable exception) { // 이름 일치시키기
         System.out.println("AfterThrowing exception = " + exception);
-    }
+    } // 예외 발생 시 출력 값 작성 (예를들어 잘못 된 값으로 호출 시)
 
     /* comment. @Around : (before + after) 실행 전 후 합친 것
         Around는 지정한 실행위치(JoinPoint) 앞 뒤를 모두 장악하고,
@@ -99,12 +98,12 @@ public class LoggingAspect {
         /* comment. 앞 뒤로 동작하게 되므로 소요되는 시간을 체크하는 로직 사용 */
         StopWatch stopWatch = new StopWatch();
         stopWatch.start(); // 시간 측정하는 스탑워치 실행
-        System.out.println("Around Before : " + joinPoint.getSignature().getName()); // 메서드 이름만 가져와보기.
+        System.out.println("Around Before 1 : " + joinPoint.getSignature().getName()); // 메서드 이름만 가져와보기.
 
         // Target 메서드 시작시키는 구문
-        Object result = joinPoint.proceed(); // 함부로 사용하면 안 됨
+        Object result = joinPoint.proceed(); // 출력 순서가 바뀌므로 함부로 사용하면 안 됨
         // 이 위에는 before , 아래는 after
-        System.out.println("Around Before : " + joinPoint.getSignature().getName()); // 메서드 이름만 가져와보기.
+        System.out.println("Around Before 2 : " + joinPoint.getSignature().getName()); // 메서드 이름만 가져와보기.
 
         stopWatch.stop(); // 스탑워치 멈추기
 

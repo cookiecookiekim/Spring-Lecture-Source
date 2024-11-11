@@ -10,7 +10,6 @@ public class Application { // (컨트롤러 객체는 생략하기로)
 
         ApplicationContext context      // ① 공장 구성
                 = new AnnotationConfigApplicationContext(ContextConfig.class); // ⑤ 전달인자로 작성한 파일정보를 전달
-        //
 
         // ⑬ 서비스 호출을 위한 서비스 클래스 빈 꺼내오기
         MemberService memberService
